@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi San Valentín ❤️</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffebee;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            cursor: pointer;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 80%;
+            width: 400px;
+        }
+        img {
+            width: 100%;
+            border-radius: 15px;
+            display: none; /* Se ocultan al inicio */
+            animation: fadeIn 0.5s;
+        }
+        h2 {
+            color: #d32f2f;
+            margin-top: 15px;
+        }
+        .instruccion {
+            font-size: 0.8em;
+            color: #999;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body onclick="siguienteSorpresa()">
+
+    <div class="container">
+        <div id="contenido">
+            <h1 style="color: #d32f2f;">❤️</h1>
+            <h2>Toca para ver nuestra historia...</h2>
+            <p class="instruccion">(Haz clic en cualquier parte)</p>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURA AQUÍ TUS FRASES Y FOTOS ---
+        const sorpresas = [
+            { texto: "Aunque la vida sea caótica y se sienta tan inestable, estar contigo me da paz", foto: "foto1.JPG" },
+            { texto: "Adonde sea pero contigo", foto: "foto2.JPG" },
+            { texto: "Eres siempre el mejor regalo", foto: "foto3.JPG" },
+            { texto: "Gracias por siempre seguirme la corriente", foto: "foto4.JPG" },
+            { texto: "Siempre admiraré ese corazonsote tuyo que amo tanto", foto: "foto5.JPG" },
+            { texto: "Te amo corazón", foto: "foto6.jpg" },
+            { texto: "Me haces la persona más feliz del universo", foto: "foto7.jpg" },
+            { texto: "No importa cuántas vueltas dé el mundo o la rueda de la fortuna, yo siempre elegiría subirme contigo una y otra vez", foto: "foto8.jpg" },
+            { texto: "Te amo más que al elote, eso es demasiadísimo", foto: "foto9.jpg" },
+            { texto: "Gracias por siempre hacerme sentir parte de tu familia", foto: "foto10.jpg" },
+            { texto: "Gracias por ser mi refugio siempre", foto: "foto11.jpg" },
+            { texto: "Siempre supe que eras tú la persona con quien quise compartir mi vida", foto: "foto12.jpg" },
+            { texto: "La pareja más enamorada!!!", foto: "foto13.jpg" },
+            { texto: "Gracias por cada date, todo es más lindo contigo!!!!", foto: "foto14.jpg" },
+            { texto: "Haces que todas las navidades sean más mágicas", foto: "foto15.jpg" },
+            { texto: "Siempre orgullosa de tus logros", foto: "foto16.jpg" },
+            { texto: "Gracias por siempre ser tan lindo y cariñoso", foto: "foto17.jpg" },
+            { texto: "Y tan loquito", foto: "foto18.jpg" },
+            { texto: "Gracias por siempre estar para mí", foto: "foto19.jpg" },
+            { texto: "Contigo la vida sabe mejor", foto: "foto20.jpg" },
+            { texto: "Algún día decoraremos así nuestra casita!!", foto: "foto21.jpg" },
+            { texto: "Sigamos coleccionando aventuras", foto: "foto22.jpg" },
+            { texto: "Gracias por compartir mis pasiones y estar siempre a mi lado", foto: "foto23.jpg" },
+            { texto: "En tus brazos siempre me siento en la cima del mundo", foto: "foto24.jpeg" },
+            { texto: "Si pudiera quedarme a vivir en un momento, sería justo aquí, abrazada a ti", foto: "foto25.jpeg" },
+            { texto: "Gracias por siempre ser la mejor pareja de baile", foto: "foto26.jpg" },
+            { texto: "Quiero pasar todas las navidades contigo", foto: "foto27.jpg" },
+            { texto: "Y celebrar todos tus cumpleaños", foto: "foto28.jpg" },
+            { texto: "Besito!!!!!", foto: "foto29.jpg" },
+            { texto: "Te adoro con todo mi corazón guapo", foto: "foto30.jpg" },
+            { texto: "Haces siempre que todos los momentos que compartimos se queden siempre en mi corazón", foto: "foto31.jpg" },
+            { texto: "La vida contigo tiene muchísimo color!!!!", foto: "foto32.jpg" },
+            { texto: "No es sólo lo que siento por ti, sino lo que siento cuando estoy contigo", foto: "foto33.jpg" },
+            { texto: "Besito!!!!!", foto: "foto34.jpg" },
+            { texto: "Hay recuerdos que no necesitan nitidez para brillar, sólo sentimientos", foto: "foto35.jpg" },
+            { texto: "Otro besito", foto: "foto36.jpg" },
+            { texto: "El mundo es enorme, pero mi lugar favorito es justo aquí contigo", foto: "foto37.jpg" },
+            { texto: "Un elote y tú, algo bien", foto: "foto38.jpg" },
+            { texto: "Aquí fuimos al museo pero tú fuiste mi obra de arte favorita", foto: "foto39.jpg" },
+            { texto: "Siempre felices", foto: "foto40.jpg" },
+            { texto: "Gracias por siempre estar para mí, en todos mis partidos", foto: "foto41.jpg" },
+            { texto: "Y en todos mis logros", foto: "foto42.jpg" },
+            { texto: "Te amo aunque en este día me hayas hecho lavar los trastes", foto: "foto43.jpg" },
+            { texto: "Tú y yo", foto: "foto44.jpg" },
+            { texto: "Tú eres el que me da la confianza para llegar cada vez más alto.", foto: "foto45.jpg" },
+            { texto: "Yo siempre pidiendo los mismos sabores y tú pidiendo cosas raras, así siempre", foto: "foto46.jpg" },
+            { texto: "Seamos siempre así de felices", foto: "foto47.jpg" },
+            { texto: "Gracias por siempre seguirme la corriente, aunque eso implique subirte a juegos bien locos", foto: "foto48.jpg" },
+            { texto: "Siempre mi mejor compañía", foto: "foto49.jpg" },
+            { texto: "Aquí cumplimos 7 años y ya vamos por el octavo!!! que sean siempre más", foto: "foto50.jpg" },
+            { texto: "Los más sonrientes siempre", foto: "foto51.jpg" },
+            { texto: "Gracias por siempre hacer de mis cumpleaños los días más especiales", foto: "foto52.jpg" },
+            { texto: "Más evidencia de que somos la mejor pareja de baile siempre", foto: "foto53.jpg" },
+            { texto: "Te amo con todo mi corazón!!!!!", foto: "foto54.jpg" },
+          
+          
+            { texto: "¡Feliz San Valentín! Te amo.", foto: "" } // Sin foto al final
+        ];
+
+        let indice = 0;
+
+        function siguienteSorpresa() {
+            const container = document.getElementById('contenido');
+            
+            if (indice < sorpresas.length) {
+                const item = sorpresas[indice];
+                let htmlContent = `<h2>${item.texto}</h2>`;
+                
+                if (item.foto !== "") {
+                    htmlContent += `<img src="${item.foto}" style="display:block;">`;
+                } else {
+                    htmlContent += `<h1 style="font-size:100px;">🎁</h1>`;
+                }
+
+                container.innerHTML = htmlContent;
+                indice++;
+            } else {
+                // Reiniciar al llegar al final
+                indice = 0;
+                container.innerHTML = "<h1>❤️</h1><h2>¿Empezamos de nuevo?</h2>";
+            }
+        }
+    </script>
+</body>
+</html>
