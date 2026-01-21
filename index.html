@@ -14,7 +14,6 @@
             background-color: #ffebee;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            cursor: pointer;
         }
         .container {
             background: white;
@@ -23,11 +22,13 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             max-width: 80%;
             width: 400px;
+            cursor: pointer; /* Solo el cuadro de fotos tiene el cursor de clic */
         }
         img {
             width: 100%;
             border-radius: 15px;
-            display: none; /* Se ocultan al inicio */
+            display: block; 
+            margin: 10px auto;
             animation: fadeIn 0.5s;
         }
         h2 {
@@ -42,47 +43,39 @@
     </style>
 </head>
 <body>
-<div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 220px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: white;">
-    <iframe 
-        id="reproductor-yt"
-        width="100%" 
-        height="120" 
-        src="" 
-        frameborder="0" 
-        allow="autoplay; encrypted-media;"
-        allowfullscreen>
-    </iframe>
-</div>
 
-<script>
-    (function() {
-        // Tus 4 canciones
-        const canciones = [
-            "3pYNd0MSVXs", // Meet Me Half Way
-            "zf2VYAtqRe0", // Burning Love
-            "3wxyN3z9PL4", // Nothing's Gonna Stop Us Now
-            "yPYZpwSpKmA"  // Together Forever
-        ];
+    <div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 220px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: white;">
+        <iframe 
+            id="reproductor-yt"
+            width="100%" 
+            height="120" 
+            src="" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media;"
+            allowfullscreen>
+        </iframe>
+    </div>
 
-        // Barajamos la lista completamente
-        const listaShuffle = canciones.sort(() => Math.random() - 0.5);
-        
-        // El truco: Ponemos la primera canción y en el parámetro 'playlist' 
-        // ponemos TODAS las demás incluyendo la primera al final para el bucle.
-        const videoIdPrincipal = listaShuffle[0];
-        const listaIDs = listaShuffle.join(',');
-
-        // URL construida para forzar la lista de reproducción
-        const urlFinal = "https://www.youtube.com/embed/" + videoIdPrincipal + 
-                         "?playlist=" + listaIDs + 
-                         "&loop=1&controls=1&autoplay=0&rel=0";
-
-        document.getElementById('reproductor-yt').src = urlFinal;
-    })();
-</script>
+    <div class="container" onclick="siguienteSorpresa()">
+        <div id="contenido">
+            <h1 style="color: #d32f2f;">❤️</h1>
+            <h2>Toca para ver nuestra historia...</h2>
+            <p class="instruccion">(Haz clic aquí para avanzar)</p>
+        </div>
+    </div>
 
     <script>
-        // --- CONFIGURA AQUÍ TUS FRASES Y FOTOS ---
+        // --- LÓGICA DE MÚSICA ALEATORIA ---
+        (function() {
+            const canciones = ["3pYNd0MSVXs", "zf2VYAtqRe0", "3wxyN3z9PL4", "yPYZpwSpKmA"];
+            const listaShuffle = canciones.sort(() => Math.random() - 0.5);
+            const videoIdPrincipal = listaShuffle[0];
+            const listaIDs = listaShuffle.join(',');
+            const urlFinal = "https://www.youtube.com/embed/" + videoIdPrincipal + "?playlist=" + listaIDs + "&loop=1&controls=1&rel=0";
+            document.getElementById('reproductor-yt').src = urlFinal;
+        })();
+
+        // --- LÓGICA DE LAS FOTOS ---
         const sorpresas = [
             { texto: "Aunque el mundo se sienta al revés, estar contigo siempre me da paz", foto: "foto1.JPG" },
             { texto: "Adonde sea pero contigo", foto: "foto2.JPG" },
@@ -138,30 +131,24 @@
             { texto: "Gracias por siempre hacer de mis cumpleaños los días más especiales 🎁", foto: "foto52.jpeg" },
             { texto: "Más evidencia de que somos la mejor pareja de baile siempre", foto: "foto53.jpeg" },
             { texto: "Te amo con todo mi corazón!!!!!💘", foto: "foto54.jpeg" },
-          
-          
-            { texto: "¡Feliz San Valentín miamor! Te amo!!!!✨.", foto: "" } // Sin foto al final
+            { texto: "¡Feliz San Valentín miamor! Te amo!!!!✨.", foto: "" }
         ];
 
         let indice = 0;
 
         function siguienteSorpresa() {
             const container = document.getElementById('contenido');
-            
             if (indice < sorpresas.length) {
                 const item = sorpresas[indice];
                 let htmlContent = `<h2>${item.texto}</h2>`;
-                
                 if (item.foto !== "") {
-                    htmlContent += `<img src="${item.foto}" style="display:block;">`;
+                    htmlContent += `<img src="${item.foto}">`;
                 } else {
                     htmlContent += `<h1 style="font-size:100px;">🎁</h1>`;
                 }
-
                 container.innerHTML = htmlContent;
                 indice++;
             } else {
-                // Reiniciar al llegar al final
                 indice = 0;
                 container.innerHTML = "<h1>❤️</h1><h2>¿Empezamos de nuevo?</h2>";
             }
