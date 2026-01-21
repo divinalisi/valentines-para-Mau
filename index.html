@@ -42,17 +42,24 @@
     </style>
 </head>
 <body>
-  <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 200px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+ <div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 200px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
     <iframe 
+        id="reproductor-yt"
         width="100%" 
         height="120" 
-        src="https://www.youtube.com/embed/3pYNd0MSVXs?controls=1&rel=0" 
-        title="YouTube video player" 
+        src="" 
         frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
+        allow="autoplay; encrypted-media;">
     </iframe>
 </div>
+
+<script>
+    // Este pequeño código elige la canción nada más abrir la página
+    const listaCanciones = ["3pYNd0MSVXs", "zf2VYAtqRe0", "3wxyN3z9PL4", "yPYZpwSpKmA"];
+    const idAzar = listaCanciones[Math.floor(Math.random() * listaCanciones.length)];
+    const playlist = listaCanciones.join(',');
+    document.getElementById('reproductor-yt').src = `https://www.youtube.com/embed/${idAzar}?playlist=${playlist}&controls=1`;
+</script>
     <div class="container" onclick="siguienteSorpresa()">
         <div id="contenido" >
             <h1 style="color: #d32f2f;">❤️</h1>
