@@ -20,52 +20,52 @@
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 80%;
+            max-width: 85%;
             width: 400px;
-            cursor: pointer; /* Solo el cuadro de fotos tiene el cursor de clic */
+            min-height: 300px; /* Asegura espacio para la foto */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
         }
-        img {
+        #contenido img {
             width: 100%;
+            max-height: 400px; /* Evita que la foto sea gigante */
+            object-fit: cover;
             border-radius: 15px;
-            display: block; 
-            margin: 10px auto;
-            animation: fadeIn 0.5s;
+            margin-top: 15px;
+            display: block; /* Asegura que la imagen sea visible */
+            animation: fadeIn 0.8s;
         }
         h2 {
             color: #d32f2f;
-            margin-top: 15px;
+            font-size: 1.2rem;
+            margin: 10px 0;
         }
         .instruccion {
             font-size: 0.8em;
             color: #999;
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 220px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: white;">
-        <iframe 
-            id="reproductor-yt"
-            width="100%" 
-            height="120" 
-            src="" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media;"
-            allowfullscreen>
-        </iframe>
+        <iframe id="reproductor-yt" width="100%" height="120" src="" frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen></iframe>
     </div>
 
     <div class="container" onclick="siguienteSorpresa()">
         <div id="contenido">
-            <h1 style="color: #d32f2f;">❤️</h1>
+            <h1 style="font-size: 60px; margin: 0;">❤️</h1>
             <h2>Toca para ver nuestra historia...</h2>
-            <p class="instruccion">(Haz clic aquí para avanzar)</p>
+            <p class="instruccion">(Haz clic aquí para empezar)</p>
         </div>
     </div>
 
     <script>
-        // --- LÓGICA DE MÚSICA ALEATORIA ---
+        // 1. MÚSICA ALEATORIA
         (function() {
             const canciones = ["3pYNd0MSVXs", "zf2VYAtqRe0", "3wxyN3z9PL4", "yPYZpwSpKmA"];
             const listaShuffle = canciones.sort(() => Math.random() - 0.5);
@@ -75,7 +75,7 @@
             document.getElementById('reproductor-yt').src = urlFinal;
         })();
 
-        // --- LÓGICA DE LAS FOTOS ---
+        // 2. HISTORIA DE FOTOS
         const sorpresas = [
             { texto: "Aunque el mundo se sienta al revés, estar contigo siempre me da paz", foto: "foto1.JPG" },
             { texto: "Adonde sea pero contigo", foto: "foto2.JPG" },
@@ -138,19 +138,28 @@
 
         function siguienteSorpresa() {
             const container = document.getElementById('contenido');
+            
             if (indice < sorpresas.length) {
                 const item = sorpresas[indice];
                 let htmlContent = `<h2>${item.texto}</h2>`;
+                
                 if (item.foto !== "") {
-                    htmlContent += `<img src="${item.foto}">`;
+                    // Aquí es donde se genera la imagen. 
+                    // Asegúrate de que los archivos estén en la misma carpeta que este HTML.
+                    htmlContent += `<img src="${item.foto}" alt="Foto de nuestra historia">`;
                 } else {
-                    htmlContent += `<h1 style="font-size:100px;">🎁</h1>`;
+                    htmlContent += `<h1 style="font-size:100px; margin: 20px 0;">🎁</h1>`;
                 }
+                
                 container.innerHTML = htmlContent;
                 indice++;
             } else {
                 indice = 0;
-                container.innerHTML = "<h1>❤️</h1><h2>¿Empezamos de nuevo?</h2>";
+                container.innerHTML = `
+                    <h1 style="font-size: 60px; margin: 0;">❤️</h1>
+                    <h2>¿Empezamos de nuevo?</h2>
+                    <p class="instruccion">(Haz clic para repetir)</p>
+                `;
             }
         }
     </script>
