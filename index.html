@@ -1,167 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi San Valentín ❤️</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ffebee;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 85%;
-            width: 400px;
-            min-height: 300px; /* Asegura espacio para la foto */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        #contenido img {
-            width: 100%;
-            max-height: 400px; /* Evita que la foto sea gigante */
-            object-fit: cover;
-            border-radius: 15px;
-            margin-top: 15px;
-            display: block; /* Asegura que la imagen sea visible */
-            animation: fadeIn 0.8s;
-        }
-        h2 {
-            color: #d32f2f;
-            font-size: 1.2rem;
-            margin: 10px 0;
-        }
-        .instruccion {
-            font-size: 0.8em;
-            color: #999;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi San Valentín ❤️</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffebee;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            cursor: pointer;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 80%;
+            width: 400px;
+        }
+        img {
+            width: 100%;
+            border-radius: 15px;
+            display: none; /* Se ocultan al inicio */
+            animation: fadeIn 0.5s;
+        }
+        h2 {
+            color: #d32f2f;
+            margin-top: 15px;
+        }
+        .instruccion {
+            font-size: 0.8em;
+            color: #999;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
 <body>
+<div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 220px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: white;">
+    <iframe 
+        id="reproductor-yt"
+        width="100%" 
+        height="120" 
+        src="" 
+        frameborder="0" 
+        allow="autoplay; encrypted-media;"
+        allowfullscreen>
+    </iframe>
+</div>
 
-    <div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 220px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: white;">
-        <iframe id="reproductor-yt" width="100%" height="120" src="" frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen></iframe>
-    </div>
+<script>
+    (function() {
+        // Tus 4 canciones
+        const canciones = [
+            "3pYNd0MSVXs", // Meet Me Half Way
+            "zf2VYAtqRe0", // Burning Love
+            "3wxyN3z9PL4", // Nothing's Gonna Stop Us Now
+            "yPYZpwSpKmA"  // Together Forever
+        ];
 
-    <div class="container" onclick="siguienteSorpresa()">
+        // Barajamos la lista completamente
+        const listaShuffle = canciones.sort(() => Math.random() - 0.5);
+        
+        // El truco: Ponemos la primera canción y en el parámetro 'playlist' 
+        // ponemos TODAS las demás incluyendo la primera al final para el bucle.
+        const videoIdPrincipal = listaShuffle[0];
+        const listaIDs = listaShuffle.join(',');
+
+        // URL construida para forzar la lista de reproducción
+        const urlFinal = "https://www.youtube.com/embed/" + videoIdPrincipal + 
+                         "?playlist=" + listaIDs + 
+                         "&loop=1&controls=1&autoplay=0&rel=0";
+
+        document.getElementById('reproductor-yt').src = urlFinal;
+    })();
+</script>
+    
+<div class="container" onclick="siguienteSorpresa()">
         <div id="contenido">
-            <h1 style="font-size: 60px; margin: 0;">❤️</h1>
+            <h1 style="color: #d32f2f;">❤️</h1>
             <h2>Toca para ver nuestra historia...</h2>
-            <p class="instruccion">(Haz clic aquí para empezar)</p>
+            <p class="instruccion">(Haz clic aquí para avanzar)</p>
         </div>
     </div>
+    <script>
+        // --- CONFIGURA AQUÍ TUS FRASES Y FOTOS ---
+        const sorpresas = [
+            { texto: "Aunque el mundo se sienta al revés, estar contigo siempre me da paz", foto: "foto1.JPG" },
+            { texto: "Adonde sea pero contigo", foto: "foto2.JPG" },
+            { texto: "Eres siempre el mejor regalo", foto: "foto3.JPG" },
+            { texto: "Gracias por siempre seguirme la corriente", foto: "foto4.JPG" },
+            { texto: "Siempre admiraré ese corazonsote tuyo que amo tanto 💖", foto: "foto5.JPG" },
+            { texto: "Te amo corazón", foto: "foto6.JPG" },
+            { texto: "Me haces la persona más feliz del universo", foto: "foto7.JPG" },
+            { texto: "No importa cuántas vueltas dé el mundo o la rueda de la fortuna, yo siempre elegiría subirme contigo una y otra vez", foto: "foto8.JPG" },
+            { texto: "Te amo más que al elote, eso es demasiadísimo", foto: "foto9.JPG" },
+            { texto: "Gracias por siempre hacerme sentir parte de tu familia", foto: "foto10.JPG" },
+            { texto: "Gracias por ser mi refugio siempre", foto: "foto11.JPG" },
+            { texto: "Siempre supe que eras tú la persona con quien quise compartir mi vida", foto: "foto12.JPG" },
+            { texto: "La pareja más enamorada 💓!!!", foto: "foto13.JPG" },
+            { texto: "Gracias por cada date, todo es más lindo contigo!!!!", foto: "foto14.JPG" },
+            { texto: "Haces que todas las navidades sean más mágicas", foto: "foto15.JPG" },
+            { texto: "Siempre orgullosa de tus logros🎖️", foto: "foto16.JPEG" },
+            { texto: "Gracias por siempre ser tan lindo y cariñoso", foto: "foto17.jpeg" },
+            { texto: "Y tan loquito", foto: "foto18.JPG" },
+            { texto: "Gracias por siempre estar para mí", foto: "foto19.JPG" },
+            { texto: "Contigo la vida sabe mejor", foto: "foto20.jpeg" },
+            { texto: "Algún día decoraremos así nuestra casita!!", foto: "foto21.jpeg" },
+            { texto: "Sigamos coleccionando aventuras 💘", foto: "foto22.jpeg" },
+            { texto: "Gracias por compartir mis pasiones y estar siempre a mi lado", foto: "foto23.jpeg" },
+            { texto: "En tus brazos siempre me siento en la cima del mundo", foto: "foto24.jpeg" },
+            { texto: "Si pudiera quedarme a vivir en un momento, sería justo aquí, abrazada a ti", foto: "foto25.jpeg" },
+            { texto: "Gracias por siempre ser la mejor pareja de baile", foto: "foto26.jpeg" },
+            { texto: "Quiero pasar todas las navidades contigo", foto: "foto27.JPG" },
+            { texto: "Y celebrar todos tus cumpleaños", foto: "foto28.JPG" },
+            { texto: "Besito!!!!!", foto: "foto29.JPG" },
+            { texto: "Te adoro con todo mi corazón guapo", foto: "foto30.jpeg" },
+            { texto: "Haces siempre que todos los momentos que compartimos se queden siempre en mi corazón", foto: "foto31.JPG" },
+            { texto: "La vida contigo tiene muchísimo color!!!!", foto: "foto32.JPG" },
+            { texto: "No es sólo lo que siento por ti, sino lo que siento cuando estoy contigo", foto: "foto33.JPG" },
+            { texto: "Besito!!!!!💋💋💋", foto: "foto34.jpeg" },
+            { texto: "Hay recuerdos que no necesitan nitidez para brillar, sólo sentimientos", foto: "foto35.jpeg" },
+            { texto: "Otro besito💋", foto: "foto36.jpeg" },
+            { texto: "El mundo es enorme, pero mi lugar favorito es justo aquí contigo", foto: "foto37.jpeg" },
+            { texto: "Un elote y tú, algo bien", foto: "foto38.jpeg" },
+            { texto: "Aquí fuimos al museo pero tú fuiste mi obra de arte favorita", foto: "foto39.jpeg" },
+            { texto: "Siempre felices 💞", foto: "foto40.jpeg" },
+            { texto: "Gracias por siempre estar para mí, en todos mis partidos", foto: "foto41.JPG" },
+            { texto: "Y en todos mis logros", foto: "foto42.jpeg" },
+            { texto: "Te amo aunque en este día me hayas hecho lavar los trastes postguardia te pasas te pasas jajaja", foto: "foto43.jpeg" },
+            { texto: "Tú y yo✨", foto: "foto44.jpeg" },
+            { texto: "Tú eres el que me da la confianza para llegar cada vez más alto", foto: "foto45.jpeg" },
+            { texto: "Yo siempre pidiendo los mismos sabores y tú pidiendo cosas raras, así siempre", foto: "foto46.jpeg" },
+            { texto: "Seamos siempre así de felices", foto: "foto47.JPG" },
+            { texto: "Gracias por siempre seguirme la corriente, aunque eso implique subirte a juegos bien locos", foto: "foto48.JPG" },
+            { texto: "Siempre mi mejor compañía", foto: "foto49.jpeg" },
+            { texto: "Aquí cumplimos 7 años y ya vamos por el octavo!!! que sean siempre más", foto: "foto50.jpeg" },
+            { texto: "Los más sonrientes siempre", foto: "foto51.jpeg" },
+            { texto: "Gracias por siempre hacer de mis cumpleaños los días más especiales 🎁", foto: "foto52.jpeg" },
+            { texto: "Más evidencia de que somos la mejor pareja de baile siempre", foto: "foto53.jpeg" },
+            { texto: "Te amo con todo mi corazón!!!!!💘", foto: "foto54.jpeg" },
+          
+          
+            { texto: "¡Feliz San Valentín miamor! Te amo!!!!✨.", foto: "" } // Sin foto al final
+        ];
 
-    <script>
-        // 1. MÚSICA ALEATORIA
-        (function() {
-            const canciones = ["3pYNd0MSVXs", "zf2VYAtqRe0", "3wxyN3z9PL4", "yPYZpwSpKmA"];
-            const listaShuffle = canciones.sort(() => Math.random() - 0.5);
-            const videoIdPrincipal = listaShuffle[0];
-            const listaIDs = listaShuffle.join(',');
-            const urlFinal = "https://www.youtube.com/embed/" + videoIdPrincipal + "?playlist=" + listaIDs + "&loop=1&controls=1&rel=0";
-            document.getElementById('reproductor-yt').src = urlFinal;
-        })();
+        let indice = 0;
 
-        // 2. HISTORIA DE FOTOS
-        const sorpresas = [
-            { texto: "Aunque el mundo se sienta al revés, estar contigo siempre me da paz", foto: "foto1.JPG" },
-            { texto: "Adonde sea pero contigo", foto: "foto2.JPG" },
-            { texto: "Eres siempre el mejor regalo", foto: "foto3.JPG" },
-            { texto: "Gracias por siempre seguirme la corriente", foto: "foto4.JPG" },
-            { texto: "Siempre admiraré ese corazonsote tuyo que amo tanto 💖", foto: "foto5.JPG" },
-            { texto: "Te amo corazón", foto: "foto6.JPG" },
-            { texto: "Me haces la persona más feliz del universo", foto: "foto7.JPG" },
-            { texto: "No importa cuántas vueltas dé el mundo o la rueda de la fortuna, yo siempre elegiría subirme contigo una y otra vez", foto: "foto8.JPG" },
-            { texto: "Te amo más que al elote, eso es demasiadísimo", foto: "foto9.JPG" },
-            { texto: "Gracias por siempre hacerme sentir parte de tu familia", foto: "foto10.JPG" },
-            { texto: "Gracias por ser mi refugio siempre", foto: "foto11.JPG" },
-            { texto: "Siempre supe que eras tú la persona con quien quise compartir mi vida", foto: "foto12.JPG" },
-            { texto: "La pareja más enamorada 💓!!!", foto: "foto13.JPG" },
-            { texto: "Gracias por cada date, todo es más lindo contigo!!!!", foto: "foto14.JPG" },
-            { texto: "Haces que todas las navidades sean más mágicas", foto: "foto15.JPG" },
-            { texto: "Siempre orgullosa de tus logros🎖️", foto: "foto16.JPEG" },
-            { texto: "Gracias por siempre ser tan lindo y cariñoso", foto: "foto17.jpeg" },
-            { texto: "Y tan loquito", foto: "foto18.JPG" },
-            { texto: "Gracias por siempre estar para mí", foto: "foto19.JPG" },
-            { texto: "Contigo la vida sabe mejor", foto: "foto20.jpeg" },
-            { texto: "Algún día decoraremos así nuestra casita!!", foto: "foto21.jpeg" },
-            { texto: "Sigamos coleccionando aventuras 💘", foto: "foto22.jpeg" },
-            { texto: "Gracias por compartir mis pasiones y estar siempre a mi lado", foto: "foto23.jpeg" },
-            { texto: "En tus brazos siempre me siento en la cima del mundo", foto: "foto24.jpeg" },
-            { texto: "Si pudiera quedarme a vivir en un momento, sería justo aquí, abrazada a ti", foto: "foto25.jpeg" },
-            { texto: "Gracias por siempre ser la mejor pareja de baile", foto: "foto26.jpeg" },
-            { texto: "Quiero pasar todas las navidades contigo", foto: "foto27.JPG" },
-            { texto: "Y celebrar todos tus cumpleaños", foto: "foto28.JPG" },
-            { texto: "Besito!!!!!", foto: "foto29.JPG" },
-            { texto: "Te adoro con todo mi corazón guapo", foto: "foto30.jpeg" },
-            { texto: "Haces siempre que todos los momentos que compartimos se queden siempre en mi corazón", foto: "foto31.JPG" },
-            { texto: "La vida contigo tiene muchísimo color!!!!", foto: "foto32.JPG" },
-            { texto: "No es sólo lo que siento por ti, sino lo que siento cuando estoy contigo", foto: "foto33.JPG" },
-            { texto: "Besito!!!!!💋💋💋", foto: "foto34.jpeg" },
-            { texto: "Hay recuerdos que no necesitan nitidez para brillar, sólo sentimientos", foto: "foto35.jpeg" },
-            { texto: "Otro besito💋", foto: "foto36.jpeg" },
-            { texto: "El mundo es enorme, pero mi lugar favorito es justo aquí contigo", foto: "foto37.jpeg" },
-            { texto: "Un elote y tú, algo bien", foto: "foto38.jpeg" },
-            { texto: "Aquí fuimos al museo pero tú fuiste mi obra de arte favorita", foto: "foto39.jpeg" },
-            { texto: "Siempre felices 💞", foto: "foto40.jpeg" },
-            { texto: "Gracias por siempre estar para mí, en todos mis partidos", foto: "foto41.JPG" },
-            { texto: "Y en todos mis logros", foto: "foto42.jpeg" },
-            { texto: "Te amo aunque en este día me hayas hecho lavar los trastes postguardia te pasas te pasas jajaja", foto: "foto43.jpeg" },
-            { texto: "Tú y yo✨", foto: "foto44.jpeg" },
-            { texto: "Tú eres el que me da la confianza para llegar cada vez más alto", foto: "foto45.jpeg" },
-            { texto: "Yo siempre pidiendo los mismos sabores y tú pidiendo cosas raras, así siempre", foto: "foto46.jpeg" },
-            { texto: "Seamos siempre así de felices", foto: "foto47.JPG" },
-            { texto: "Gracias por siempre seguirme la corriente, aunque eso implique subirte a juegos bien locos", foto: "foto48.JPG" },
-            { texto: "Siempre mi mejor compañía", foto: "foto49.jpeg" },
-            { texto: "Aquí cumplimos 7 años y ya vamos por el octavo!!! que sean siempre más", foto: "foto50.jpeg" },
-            { texto: "Los más sonrientes siempre", foto: "foto51.jpeg" },
-            { texto: "Gracias por siempre hacer de mis cumpleaños los días más especiales 🎁", foto: "foto52.jpeg" },
-            { texto: "Más evidencia de que somos la mejor pareja de baile siempre", foto: "foto53.jpeg" },
-            { texto: "Te amo con todo mi corazón!!!!!💘", foto: "foto54.jpeg" },
-            { texto: "¡Feliz San Valentín miamor! Te amo!!!!✨.", foto: "" }
-        ];
+        function siguienteSorpresa() {
+            const container = document.getElementById('contenido');
+            
+            if (indice < sorpresas.length) {
+                const item = sorpresas[indice];
+                let htmlContent = `<h2>${item.texto}</h2>`;
+                
+                if (item.foto !== "") {
+                    htmlContent += `<img src="${item.foto}" style="display:block;">`;
+                } else {
+                    htmlContent += `<h1 style="font-size:100px;">🎁</h1>`;
+                }
 
-        let indice = 0;
-
-        function siguienteSorpresa() {
-            const container = document.getElementById('contenido');
-            
-            if (indice < sorpresas.length) {
-                const item = sorpresas[indice];
-                let htmlContent = `<h2>${item.texto}</h2>`;
-                
-                if (item.foto !== "") {
-                    // Aquí es donde se genera la imagen. 
-                    // Asegúrate de que los archivos estén en la misma carpeta que este HTML.
-                    htmlContent += `<img src="${item.foto}" alt="Foto de nuestra historia">`;
-                } else {
-                    htmlContent += `<h1 style="font-size:100px; margin: 20px 0;">🎁</h1>`;
-                }
-                
-                container.innerHTML = htmlContent;
-                indice++;
-            } else {
-                indice = 0;
-                container.innerHTML = `
-                    <h1 style="font-size: 60px; margin: 0;">❤️</h1>
-                    <h2>¿Empezamos de nuevo?</h2>
-                    <p class="instruccion">(Haz clic para repetir)</p>
-                `;
-            }
-        }
-    </script>
+                container.innerHTML = htmlContent;
+                indice++;
+            } else {
+                // Reiniciar al llegar al final
+                indice = 0;
+                container.innerHTML = "<h1>❤️</h1><h2>¿Empezamos de nuevo?</h2>";
+            }
+        }
+    </script>
 </body>
 </html>
+ ahora no se ven las fotos, sólo el video, qué pasa?
