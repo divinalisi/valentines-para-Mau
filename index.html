@@ -42,7 +42,7 @@
     </style>
 </head>
 <body>
-<div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 200px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+<div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; width: 220px; overflow: hidden; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: white;">
     <iframe 
         id="reproductor-yt"
         width="100%" 
@@ -56,6 +56,7 @@
 
 <script>
     (function() {
+        // Tus 4 canciones
         const canciones = [
             "3pYNd0MSVXs", // Meet Me Half Way
             "zf2VYAtqRe0", // Burning Love
@@ -63,22 +64,22 @@
             "yPYZpwSpKmA"  // Together Forever
         ];
 
-        // Mezclamos la lista para que el orden sea diferente siempre
-        const listaMezclada = canciones.sort(() => Math.random() - 0.5);
-        const primera = listaMezclada[0];
-        const resto = listaMezclada.join(',');
+        // Barajamos la lista completamente
+        const listaShuffle = canciones.sort(() => Math.random() - 0.5);
+        
+        // El truco: Ponemos la primera canción y en el parámetro 'playlist' 
+        // ponemos TODAS las demás incluyendo la primera al final para el bucle.
+        const videoIdPrincipal = listaShuffle[0];
+        const listaIDs = listaShuffle.join(',');
 
-        // El secreto es poner 'playlist' con todos los IDs
-        document.getElementById('reproductor-yt').src = `https://www.youtube.com/embed/${primera}?playlist=${resto}&controls=1&loop=1`;
+        // URL construida para forzar la lista de reproducción
+        const urlFinal = "https://www.youtube.com/embed/" + videoIdPrincipal + 
+                         "?playlist=" + listaIDs + 
+                         "&loop=1&controls=1&autoplay=0&rel=0";
+
+        document.getElementById('reproductor-yt').src = urlFinal;
     })();
 </script>
-    <div class="container" onclick="siguienteSorpresa()">
-        <div id="contenido" >
-            <h1 style="color: #d32f2f;">❤️</h1>
-            <h2>Toca para ver nuestra historia...</h2>
-            <p class="instruccion">(Haz clic en cualquier parte)</p>
-        </div>
-    </div>
 
     <script>
         // --- CONFIGURA AQUÍ TUS FRASES Y FOTOS ---
